@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Sup_Fitness</string>
+    <string name="enter_your_weight">Enter your Weight</string>
+    <string name="add_current_weight">Add current weight</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">OK</string>
+</resources>
