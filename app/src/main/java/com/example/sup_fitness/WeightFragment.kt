@@ -26,7 +26,6 @@ class WeightFragment: Fragment(), RecyclerViewAdapter.RowClickListener {
 
     lateinit var recyclerViewAdapter: RecyclerViewAdapter
     lateinit var viewModel: WeightFragmentViewModel
-    @SuppressLint("SimpleDateFormat")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -38,7 +37,6 @@ class WeightFragment: Fragment(), RecyclerViewAdapter.RowClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val okbtn = view.findViewById<Button>(R.id.okBtn)
         recyclerView.apply {
             layoutManager = LinearLayoutManager(activity)
             recyclerViewAdapter = RecyclerViewAdapter(this@WeightFragment)
@@ -53,16 +51,8 @@ class WeightFragment: Fragment(), RecyclerViewAdapter.RowClickListener {
             recyclerViewAdapter.notifyDataSetChanged()
         })
 
-        okbtn.setOnClickListener {
-            val number = okbtn.num
-            val date = SimpleDateFormat("yyyy-MM-dd").format(Date())
-
-            val user = UserEntity(0, number, date)
-            viewModel.insertUserInfo(user)
-        }
-
-        view.addBtn.setOnClickListener {
-            var dialog = DialogFragment()
+        addBtn.setOnClickListener {
+            val dialog = DialogFragment()
 
             fragmentManager?.let { it1 -> dialog.show(it1,"customDialog") }
         }
