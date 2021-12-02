@@ -40,7 +40,7 @@ class RecyclerViewAdapter(val listener: RowClickListener): RecyclerView.Adapter<
         val deleteUserID = view.deleteUserID
         fun bind(data: UserEntity) {
             tvWeight.text = data.weight.toString()
-            tvDate.text = data.date.toString()
+            tvDate.text = data.date
 
             deleteUserID.setOnClickListener{
                 listener.onDeleteUserClickListener(data)

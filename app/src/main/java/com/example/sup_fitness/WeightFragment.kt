@@ -11,8 +11,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager.VERTICAL
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.customview.customView
 import com.example.sup_fitness.db.UserEntity
 import kotlinx.android.synthetic.main.fragment_dialog.*
 import kotlinx.android.synthetic.main.fragment_dialog.view.*
@@ -52,10 +56,33 @@ class WeightFragment: Fragment(), RecyclerViewAdapter.RowClickListener {
         })
 
         addBtn.setOnClickListener {
-            val dialog = DialogFragment()
-
-            fragmentManager?.let { it1 -> dialog.show(it1,"customDialog") }
+            showWeightDialog()
         }
+    }
+
+    private fun showWeightDialog() {
+        val dialog = MaterialDialog(requireContext())
+            .noAutoDismiss()
+            .customView(R.layout.fragment_dialog)
+
+        dialog.num.maxValue = 500
+        dialog.num.minValue = 30
+
+        dialog.okBtn.setOnClickListener {
+            val number = dialog.num.value
+            val date = SimpleDateFormat("yyyy-MM-dd").format(Date())
+
+            val user = UserEntity(0, number, date)
+            viewModel.insertUserInfo(user)
+
+            dialog.dismiss()
+        }
+
+        dialog.cancelBtn.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.show()
     }
 
     override fun onDeleteUserClickListener(user: UserEntity) {
@@ -64,7 +91,7 @@ class WeightFragment: Fragment(), RecyclerViewAdapter.RowClickListener {
     }
 
     override fun onItemClickListener(user: UserEntity) {
-        TODO("Not yet implemented")
+        null
     }
 }
 

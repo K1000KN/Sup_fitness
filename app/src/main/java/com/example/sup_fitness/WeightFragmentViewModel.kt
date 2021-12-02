@@ -11,6 +11,7 @@ class WeightFragmentViewModel(app: Application): AndroidViewModel(app) {
     lateinit var  allUsers : MutableLiveData<List<UserEntity>>
     init{
         allUsers = MutableLiveData()
+        getAllUsers()
     }
 
     fun getAllUsersObservers(): MutableLiveData<List<UserEntity>> {

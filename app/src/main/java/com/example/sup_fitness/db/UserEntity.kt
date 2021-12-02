@@ -8,6 +8,6 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "userinfo")
 data class UserEntity(
     @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "id") val id: Int = 0,
-    @ColumnInfo(name = "weight") val weight: Int = 0,
+    @ColumnInfo(name = "weight") val weight: Int,
     @ColumnInfo(name = "date") val date: String,
 )
