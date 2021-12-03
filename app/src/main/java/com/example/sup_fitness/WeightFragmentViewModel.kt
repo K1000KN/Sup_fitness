@@ -3,16 +3,19 @@ package com.example.sup_fitness
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.sup_fitness.db.RoomAppDb
 import com.example.sup_fitness.db.UserEntity
 
 class WeightFragmentViewModel(app: Application): AndroidViewModel(app) {
 
-    lateinit var  allUsers : MutableLiveData<List<UserEntity>>
-    init{
-        allUsers = MutableLiveData()
+    private var  allUsers : MutableLiveData<List<UserEntity>> = MutableLiveData()
+    var list = mutableListOf<UserEntity>()
+
+    init {
         getAllUsers()
+        allUsers.value = mutableListOf()
     }
 
     fun getAllUsersObservers(): MutableLiveData<List<UserEntity>> {
@@ -21,8 +24,10 @@ class WeightFragmentViewModel(app: Application): AndroidViewModel(app) {
 
     fun getAllUsers() {
         val userDao = RoomAppDb.getAppDatabase((getApplication()))?.userDao()
-        val list = userDao?.getAllUserInfo()
+        list = userDao?.getAllUserInfo() as MutableList<UserEntity>
+
         allUsers.postValue(list)
+        Log.i("allGet",list.toString())
     }
 
     fun insertUserInfo(entity: UserEntity) {
@@ -36,4 +41,6 @@ class WeightFragmentViewModel(app: Application): AndroidViewModel(app) {
         userDao?.deleteUser(entity)
         getAllUsers()
     }
+
+
 }

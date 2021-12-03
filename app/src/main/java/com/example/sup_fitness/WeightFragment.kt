@@ -1,5 +1,6 @@
 package com.example.sup_fitness
 
+import android.annotation.SuppressLint
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.preference.PreferenceManager
@@ -9,12 +10,11 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
-import androidx.recyclerview.widget.ItemTouchHelper.LEFT
-import androidx.recyclerview.widget.ItemTouchHelper.RIGHT
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager.VERTICAL
@@ -33,6 +33,7 @@ class WeightFragment: Fragment(), RecyclerViewAdapter.RowClickListener {
 
     lateinit var recyclerViewAdapter: RecyclerViewAdapter
     lateinit var viewModel: WeightFragmentViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -66,15 +67,15 @@ class WeightFragment: Fragment(), RecyclerViewAdapter.RowClickListener {
 
         val lastDay = settings.getInt("day", 0)
 
-        if (lastDay != currentDay) {
+       if (lastDay != currentDay) {
             val editor : SharedPreferences.Editor = settings.edit()
             editor.putInt("day", currentDay)
             editor.apply()
 
             addBtn.setOnClickListener {
-            showWeightDialog()
+                showWeightDialog()
             }
-        }
+      }
 
         else {
             Toast.makeText(context, "Can't add weidght more than a day", Toast.LENGTH_LONG).show()
@@ -106,7 +107,7 @@ class WeightFragment: Fragment(), RecyclerViewAdapter.RowClickListener {
         dialog.show()
     }
 
-    val simpleCallBack = object : ItemTouchHelper.SimpleCallback(0, RIGHT) {
+    private val simpleCallBack = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
         override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
             return false
         }
@@ -128,5 +129,3 @@ class WeightFragment: Fragment(), RecyclerViewAdapter.RowClickListener {
         TODO()
     }
 }
-
-
