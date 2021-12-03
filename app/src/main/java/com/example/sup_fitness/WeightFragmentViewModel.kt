@@ -1,6 +1,7 @@
 package com.example.sup_fitness
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.example.sup_fitness.db.RoomAppDb
@@ -21,7 +22,6 @@ class WeightFragmentViewModel(app: Application): AndroidViewModel(app) {
     fun getAllUsers() {
         val userDao = RoomAppDb.getAppDatabase((getApplication()))?.userDao()
         val list = userDao?.getAllUserInfo()
-
         allUsers.postValue(list)
     }
 

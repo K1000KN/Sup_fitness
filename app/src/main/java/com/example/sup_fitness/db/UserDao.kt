@@ -8,7 +8,7 @@ import androidx.room.Query
 @Dao
 interface UserDao {
 
-    @Query("SELECT * FROM userinfo ORDER BY id DESC")
+    @Query("SELECT * FROM userinfo ORDER BY id ASC")
     fun getAllUserInfo(): List<UserEntity>?
 
     @Insert

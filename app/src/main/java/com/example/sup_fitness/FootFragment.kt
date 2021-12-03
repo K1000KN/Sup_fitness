@@ -12,6 +12,6 @@ class FootFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_curve, container, false)
+        return inflater.inflate(R.layout.fragment_foot, container, false)
     }
 }
