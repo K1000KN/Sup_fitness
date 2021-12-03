@@ -4,4 +4,6 @@
     <string name="add_current_weight">Add current weight</string>
     <string name="cancel">Cancel</string>
     <string name="ok">OK</string>
+    <string name="Description_Chart">Enter at least 2 Entry to display the Chart, After putting a weight entry please refresh</string>
+    <string name="refresh">refresh</string>
 </resources>
