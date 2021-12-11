@@ -21,7 +21,7 @@ internal class ViewPagerAdapter(
                 CurveFragment()
             }
             2 -> {
-                FootFragment()
+                MapsFragment()
             }
             else -> getItem(position)
         }
